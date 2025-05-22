@@ -3,6 +3,8 @@ import "./global.css";
 
 function noSearchDefaultPageRender() {
   const app = document.querySelector<HTMLDivElement>("#app")!;
+  const currentDomain = window.location.hostname;
+
   app.innerHTML = `
     <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh;">
       <div class="content-container">
@@ -12,7 +14,7 @@ function noSearchDefaultPageRender() {
           <input 
             type="text" 
             class="url-input"
-            value="https://unduck.link?q=%s"
+            value="https://${currentDomain}?q=%s"
             readonly 
           />
           <button class="copy-button">
@@ -21,11 +23,7 @@ function noSearchDefaultPageRender() {
         </div>
       </div>
       <footer class="footer">
-        <a href="https://t3.chat" target="_blank">t3.chat</a>
-        •
-        <a href="https://x.com/theo" target="_blank">theo</a>
-        •
-        <a href="https://github.com/t3dotgg/unduck" target="_blank">github</a>
+        <a href="https://github.com/lonelyplanetdev/unduck" target="_blank">github</a>
       </footer>
     </div>
   `;
@@ -64,15 +62,14 @@ function getBangredirectUrl() {
   const cleanQuery = query.replace(/!\S+\s*/i, "").trim();
 
   // If the query is just `!gh`, use `github.com` instead of `github.com/search?q=`
-  if (cleanQuery === "")
-    return selectedBang ? `https://${selectedBang.d}` : null;
+  if (cleanQuery === "") return selectedBang ? `https://${selectedBang.d}` : null;
 
   // Format of the url is:
   // https://www.google.com/search?q={{{s}}}
   const searchUrl = selectedBang?.u.replace(
     "{{{s}}}",
     // Replace %2F with / to fix formats like "!ghr+t3dotgg/unduck"
-    encodeURIComponent(cleanQuery).replace(/%2F/g, "/"),
+    encodeURIComponent(cleanQuery).replace(/%2F/g, "/")
   );
   if (!searchUrl) return null;
 

@@ -15984,12 +15984,12 @@ export const bangs = [
   },
   {
     c: "Tech",
-    d: "www.cnet.com",
+    d: "chatgpt.com",
     r: 165,
     s: "CNET",
     sc: "Downloads",
     t: "c",
-    u: "http://www.cnet.com/1770-5_1-0.html?query={{{s}}}",
+    u: "https://chat.openai.com/?q={{{s}}}",
   },
   {
     c: "Shopping",
